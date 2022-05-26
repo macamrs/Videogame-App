@@ -4,10 +4,10 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define('videogame', {
-    id:{
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      allowNull: false,
+    id: {
+      type: DataTypes.UUID, // Genera un nro ramdom
+      defaultValue: DataTypes.UUIDV4, // Me genera automaticamente un UUIDV4
+      allowNull: false, // No permite que este vacio
       primaryKey: true
     },
     name: {
@@ -20,6 +20,7 @@ module.exports = (sequelize) => {
     },
     launch_date: {
       type: DataTypes.STRING,
+      allowNull: true
     },
     rating: {
       type: DataTypes.FLOAT
@@ -31,9 +32,10 @@ module.exports = (sequelize) => {
       type: DataTypes.ARRAY(DataTypes.STRING),
       allowNull: false,
     },
-    vg_created_db: {
+    vg_created_db: { // Para distinguir entre juego en base de datos y api
       type: DataTypes.BOOLEAN,
-      defaultValue: true
+      defaultValue: true,
+      allowNull: false
     }
   });
 };
