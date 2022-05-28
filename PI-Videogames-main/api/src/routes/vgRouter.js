@@ -3,16 +3,9 @@ const { getAllVideoGames } = require('../control/vgControl');
 
 const router = Router();
 
-router.use('/', getAllVideoGames);
+// http://localhost:3001/videogames
 
-router.get('/')
-
-// router.get("/name", (req, res) => {
-//     const { name } = req.query
-// })
-
-// router.get("/id", (req, res) => {
-//     const { id } = req.body
-// })
+// GET /videogames (show all videogames)
+router.get('/', getAllVideoGames)
 
 module.exports = router;
