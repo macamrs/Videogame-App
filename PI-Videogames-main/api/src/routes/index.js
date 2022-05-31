@@ -8,7 +8,7 @@ const gameRouter = require('./gameRouter')
 // Ejemplo: router.use('/auth', authRouter);
 // Hacer callbacks de los errores
 
-// GET /videogames; GET /videogames/:id
+// GET /videogames; GET /videogames/name
 router.use("/videogames", vgRouter)
 
 // POST /videogame; GET /videogame/:id
