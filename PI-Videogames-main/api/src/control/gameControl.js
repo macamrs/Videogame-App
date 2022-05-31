@@ -42,7 +42,7 @@ async function gameDetail(req, res) {
         }
 
     } catch(error){
-        return res.json("Game not in data base") 
+        return res.send("Game not in data base") 
     }
 
     try{
@@ -54,11 +54,11 @@ async function gameDetail(req, res) {
                 id: gameData.id, 
                 name: gameData.name,
                 description: gameData.description_raw,
-                date: gameData.released,
+                launch_date: gameData.released,
                 rating: gameData.rating,
                 platforms: gameData.platforms.map(p => p.platform.name),
                 genre: gameData.genres.map(g => g.name),
-                img: gameData.background_image
+                image: gameData.background_image
             });
         }
 
