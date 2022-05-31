@@ -48,25 +48,40 @@ async function gamesDB () {
   
 async function getAllVideoGames (req, res) {
     const { name } = req.query;
+
     const infoDB = await gamesDB();
     const infoAPI = await gameAPI();
-    const allGames = infoAPI.concat(infoDB) // [...dataDb, ...dataApi];
+    const allGames = infoDB.concat(infoAPI) //[...dataDb, ...dataApi];
 
     if(name) {
-      let gameByName = allGames.filter(g => g.name.toLowerCase().includes(name.toLowerCase()));
+      let gameByName = await axios.get(`https://api.rawg.io/api/games?search={${name}}&key=${API_KEY}`);
+      let queryData = gameByName.data.results.map(g => {
+        return {        
+          id: g.id,
+          name: g.name,
+          image: g.background_image,
+          rating: g.rating,
+          genres: g.genres.map(g => g.name),
+          launch_date: g.released,
+          platforms: g.platforms.map(p => p.platform.name)}
+      });
+      // console.log(queryData)
+      // allGames.filter(g => g.name.toLowerCase().includes(name.toLowerCase()));
       
-      if (!gameByName.length) {
+      if (!queryData.length) {
         return res.send('Game not in Data Base')
-      } else if(gameByName.length > 15) {
-        return gameByName = gameByName.slice(0, 15)
+      } else if(queryData.length > 15) {
+        queryData = queryData.slice(0, 15)
+        // console.log(queryData)
+        return res.send(queryData);
       } else {
-        return res.send(gameByName)
-      }
-
+        return res.send(queryData)
+      }  
     }
 
     return res.status(200).send(allGames);
-  };
+};
+
 
 module.exports = {
     getAllVideoGames
