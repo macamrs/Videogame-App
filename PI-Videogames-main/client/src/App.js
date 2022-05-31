@@ -1,25 +1,21 @@
 import React from 'react';
-import {BrowserRouter } from 'react-router-dom'
-import { Route, Routes } from 'react-router-dom'
 import './App.css';
-
-// Container
-import CreateGame from './components/CreateGame'
-import GameDetails from './components/GameDetails'
-import LaunchScreen from './components/LaunchScreen'
-import Main from './components/Main'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import VideoGames from './components/VideoGames'
+import Screen from './components/Screen';
+import GameDetails from './components/GameDetails';
+import GameForm from './components/GameForm'
 
 function App() {
   return (
     <div className="App">
-      <h1>Henry Videogames</h1>
       <BrowserRouter>
         <Routes>
-          <Route exact path='/' component={LaunchScreen}/>
-          <Route path='/home' component={Main}/>
-          <Route path='/creategame' component={CreateGame}/>
-          <Route path='/videogame/:id' component={GameDetails}/>
-        </Routes>
+            <Route exact path='/' element={<Screen />} />
+            <Route path='/home' element={<VideoGames />} />      
+            <Route path='/details/:id' element={<GameDetails />} />    
+            <Route path='/creategame' element={<GameForm />} /> 
+        </Routes>      
       </BrowserRouter>
     </div>
   );
