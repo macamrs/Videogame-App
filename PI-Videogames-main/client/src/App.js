@@ -1,10 +1,10 @@
 import React from 'react';
 import './App.css';
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import VideoGames from './components/VideoGames'
-import Screen from './components/Screen';
-import GameDetails from './components/GameDetails';
-import GameForm from './components/GameForm'
+import VideoGames from './components/Videogames/VideoGames'
+import Screen from './components/LandingPage/Screen';
+import GameDetails from './components/GameDetails/GameDetails';
+import GameForm from './components/GameForm/GameForm'
 
 function App() {
   return (
