@@ -1,0 +1,22 @@
+.form_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.form_section {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+    margin: auto;
+    width: 90%;
+}
+
+.form_section input,
+.form_section textarea,
+.form_section select {
+    margin: 1rem;
+    height: 1.5rem;
+    text-align: center;
+}

@@ -1,0 +1,12 @@
+.card_game {
+    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
+    border-radius: 1rem;
+}
+
+.card_game img {
+    width: 100%;
+    height: 37vh;
+    object-fit: cover;
+    border-radius: 1rem;
+    margin-bottom: 1rem;
+}
