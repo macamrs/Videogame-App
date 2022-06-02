@@ -17,15 +17,15 @@ async function gameAPI () {
         arrGames = arrGames.concat(gameResults);
       }
   
-      const gamesApi = arrGames.map( g => {  
+      const gamesApi = arrGames.map(g => {  
         return {
-          id: g.id,
-          name: g.name,
-          image: g.background_image,
-          rating: g.rating,
-          genres: g.genres.map(g => g.name),
-          launch_date: g.released,
-          platforms: g.platforms.map(p => p.platform.name)
+            id: g.id,
+            name: g.name,
+            image: g.background_image,
+            rating: g.rating,
+            genre: g.genres.map(g => g.name),
+            launch_date: g.released,
+            platforms: g.platforms.map(p => p.platform.name)
         };
       });
   
@@ -36,14 +36,18 @@ async function gameAPI () {
     }
   };
   
-async function gamesDB () {
+async function gamesDB() {
+  try {
     const gameDB = await Videogame.findAll({
         include: {
         model: Genre,
         attributes: ["name"]
         }
     })
-    return gameDB;
+    return gameDB;  
+  } catch (error) {
+    console.log(error)
+  }
 };
   
 async function getAllVideoGames (req, res) {

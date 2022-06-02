@@ -4,7 +4,7 @@ const { Videogame, Genre } = require('../db')
 
 // http://localhost:3001/videogame
 async function createVideoGame (req, res, next) {
-        const { name, launch_date, description, rating, platforms, image, genre } = req.body;
+        const { name, launch_date, description, rating, platforms, image, genre, vg_created_db } = req.body;
 
         try {
             const newGame = await Videogame.create({
@@ -13,14 +13,19 @@ async function createVideoGame (req, res, next) {
                 launch_date,
                 rating,
                 image,
-                platforms
+                platforms,
+                vg_created_db
             })
 
-            const gameDb = await Genre.findAll({ where: {name : genre}})
-            newGame.addGenre(gameDb);
+            const gameDb = await Genre.findAll({ 
+                where: {
+                    name : genre
+                }
+            })
+            await newGame.addGenre(gameDb);
 
-            return res.status(201).send('New game created')  
-            
+            return res.status(201).send(newGame) // retornar juego creado
+            // return res.status(200).send('Videogame created)
         } catch (error) {
             console.log(error)
         }              
@@ -30,7 +35,7 @@ async function createVideoGame (req, res, next) {
 async function gameDetail(req, res) {
     const { id } = req.params;
 
-    try{
+    try {
         if(isNaN(id)) {
             let gameDB = await Videogame.findByPk(id, { 
                 include: {
