@@ -23,10 +23,12 @@ module.exports = (sequelize) => {
       allowNull: true
     },
     rating: {
-      type: DataTypes.FLOAT
+      type: DataTypes.FLOAT,
+      allowNull: true,
     },
     image: {
-      type: DataTypes.STRING
+      type: DataTypes.STRING,
+      allowNull: true
     },
     platforms: {
       type: DataTypes.ARRAY(DataTypes.STRING),
@@ -35,7 +37,9 @@ module.exports = (sequelize) => {
     vg_created_db: { // Para distinguir entre juego en base de datos y api
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-      allowNull: false
+      allowNull: true
     }
+  },{
+    timestamps: false
   });
 };
