@@ -12,11 +12,11 @@ const platformRouter = require('./platformRouter')
 // GET /videogames; GET /videogames/name
 router.use("/videogames", vgRouter)
 
-// POST /videogame; GET /videogame/:id
-router.use("/videogame", gameRouter)
-
 // GET /genres
 router.use("/genres", genreRouter)
+
+// POST /videogame; GET /videogame/:id
+router.use("/videogame", gameRouter)
 
 // GET /platforms
 router.use("/platforms", platformRouter)

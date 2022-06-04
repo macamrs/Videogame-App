@@ -2,7 +2,6 @@ const { Router } = require('express');
 const router = Router();
 const { createVideoGame, gameDetail, gameDeleted } = require('../control/gameControl')
 
-
 // POST /videogame (create a videogame)
 router.post('/', createVideoGame)
 
