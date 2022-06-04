@@ -2,22 +2,21 @@ import {
     GET_VIDEOGAMES, //
     GET_VIDEOGAMES_BY_ID, //
     SEARCH_GAME, //
-    SORT_BY_ALPHABET,
-    SORT_BY_RATING,
-    SORT_BY_PLATFORMS,
-    SORT_BY_ORIGIN,
     GET_ALL_GENRES, //
+    GET_PLATFORMS, //
     DELETE_GAME, //
-    GET_PLATFORMS //
+    SORT_BY_ALPHABET, //
+    SORT_BY_RATING, //
+    SORT_BY_ORIGIN, //
+    SORT_BY_GENRE, //
 } from "../actions/actions";
 
 const initialState = {
-    videogames: [],
-    gameCopy: [],
-    genres: [],
-    vgID: [],
-    vgDB: [],
-    platforms: []
+    videogames: [], 
+    gameDetail: {}, 
+    gamesCopy: [], 
+    genres: [],  
+    platforms: [],    
 }
 
 export default function reducer( state = initialState, action) {
@@ -32,7 +31,7 @@ export default function reducer( state = initialState, action) {
         case GET_VIDEOGAMES_BY_ID:
             return {
                 ...initialState,
-                vgID : action.payload
+                gameDetail : action.payload
             }
 
         case GET_ALL_GENRES:
@@ -44,7 +43,7 @@ export default function reducer( state = initialState, action) {
         case DELETE_GAME:
             return {
                 ...initialState,
-                vgDB: action.payload
+                gameDetail: action.payload
             }     
          
         case GET_PLATFORMS:
@@ -61,44 +60,60 @@ export default function reducer( state = initialState, action) {
             
         case SORT_BY_ALPHABET:
             let gamesA = state.videogames
-            const gamesOrderAlpha = () => {
-                if(action.payload === 'ascendent') {
-                    gamesA.sort((a, b) => (a.name > b.name ? 1 : a.name < b.name ? -1 : 0))
-                } else {
-                    gamesA.sort((a, b) => (a.name > b.name ? -1 : a.name < b.name ? 1 : 0))
-                }
-            }
+
+            const gamesOrderAlpha = action.payload === 'ascendent' ? gamesA.sort((a, b) => {
+                if (a.name > b.name) return 1;
+                if (a.name < b.name) return -1;
+                else return 0; 
+            }) : gamesA.sort((a, b) => {
+                if (a.name > b.name) return -1;
+                if (a.name < b.name) return 1;
+                else return 0;                 
+            });
+
             return {
                 ...initialState,
                 videogames : gamesOrderAlpha
             }  
 
         case SORT_BY_RATING:
-            let gamesR = state.videogames 
-            const gamesOrderRating = () => {
-                if(action.payload === 'ascendent') {
-                    gamesR.sort((a, b) => (a.rating > b.rating ? 1 : a.rating < b.rating ? -1 : 0))
-                } else {
-                    gamesR.sort((a, b) => (a.rating > b.rating ? -1 : a.rating < b.rating ? 1 : 0))
-                }
-            }           
+            let gamesR = state.videogames
+
+            const gamesOrderRating = action.payload === 'ascendent' ? gamesR.sort((a, b) => {
+                if (a.rating < b.rating) return 1;
+                if (a.rating > b.rating) return -1;
+                else return 0; 
+            }) : gamesR.sort((a, b) => {
+                if (a.rating < b.rating) return -1;
+                if (a.rating > b.rating) return 1;
+                else return 0;                 
+            });
+
             return {
                 ...initialState,
                 videogames : gamesOrderRating
-            }  
-
-        case SORT_BY_PLATFORMS:
-            return {
-                ...initialState,
-                videogames : action.payload
             } 
-             
+
         case SORT_BY_ORIGIN:
+            let gameOrigin = state.gamesCopy
+
+            const originFilter = action.payload === 'created' ? gameOrigin.filter(c => c.vg_created_db) : gameOrigin.filter(e => !e.vg_created_db)
+
             return {
                 ...initialState,
-                videogames : action.payload
-            }              
-            
+                videogames : action.payload === 'all' ? state.videogames : originFilter.length ? originFilter : console.log('Game not found')
+            }    
+
+        case SORT_BY_GENRE:
+            let genreGame = state.gamesCopy
+
+            const genreFilter = action.payload === 'all' ? genreGame 
+            : genreGame.filter(g => g.genres?.includes(action.payload))
+
+            return {
+                ...initialState,
+                videogames: genreFilter
+            }
 
         default: 
         return state;
