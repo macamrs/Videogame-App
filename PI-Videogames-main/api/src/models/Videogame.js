@@ -18,7 +18,7 @@ module.exports = (sequelize) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    launch_date: {
+    released: {
       type: DataTypes.STRING,
       allowNull: true
     },
@@ -36,8 +36,7 @@ module.exports = (sequelize) => {
     },
     vg_created_db: { // Para distinguir entre juego en base de datos y api
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
-      allowNull: true
+      defaultValue: true
     }
   },{
     timestamps: false
