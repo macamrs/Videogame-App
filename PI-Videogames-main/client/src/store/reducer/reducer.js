@@ -21,45 +21,46 @@ const initialState = {
 
 export default function reducer( state = initialState, action) {
     switch(action.type) {
+
         case GET_VIDEOGAMES:
             return {
-                ...initialState,
+                ...state,
                 videogames: action.payload,
-                gameCopy : action.payload
+                gamesCopy : action.payload
             }
 
         case GET_VIDEOGAMES_BY_ID:
             return {
-                ...initialState,
+                ...state,
                 gameDetail : action.payload
             }
 
         case GET_ALL_GENRES:
             return {
-                ...initialState,
+                ...state,
                 genres: action.payload
             }             
             
         case DELETE_GAME:
             return {
-                ...initialState,
+                ...state,
                 gameDetail: action.payload
             }     
          
         case GET_PLATFORMS:
             return {
-                ...initialState,
+                ...state,
                 platforms: action.payload
             }   
 
         case SEARCH_GAME:
             return {
-                ...initialState,
+                ...state,
                 videogames : action.payload
             }  
             
         case SORT_BY_ALPHABET:
-            let gamesA = state.videogames
+            let gamesA = state.gamesCopy
 
             const gamesOrderAlpha = action.payload === 'ascendent' ? gamesA.sort((a, b) => {
                 if (a.name > b.name) return 1;
@@ -72,12 +73,12 @@ export default function reducer( state = initialState, action) {
             });
 
             return {
-                ...initialState,
+                ...state,
                 videogames : gamesOrderAlpha
             }  
 
         case SORT_BY_RATING:
-            let gamesR = state.videogames
+            let gamesR = state.gamesCopy
 
             const gamesOrderRating = action.payload === 'ascendent' ? gamesR.sort((a, b) => {
                 if (a.rating < b.rating) return 1;
@@ -90,32 +91,32 @@ export default function reducer( state = initialState, action) {
             });
 
             return {
-                ...initialState,
+                ...state,
                 videogames : gamesOrderRating
             } 
 
         case SORT_BY_ORIGIN:
             let gameOrigin = state.gamesCopy
 
-            const originFilter = action.payload === 'created' ? gameOrigin.filter(c => c.vg_created_db) : gameOrigin.filter(e => !e.vg_created_db)
+            const originFilter = action.payload === 'created' ? gameOrigin.filter(c => c.vg_created_db === true) : gameOrigin.filter(e => !e.vg_created_db)
 
             return {
-                ...initialState,
-                videogames : action.payload === 'all' ? state.videogames : originFilter.length ? originFilter : console.log('Game not found')
+                ...state,
+                videogames : action.payload === 'all' ? gameOrigin : originFilter
             }    
 
         case SORT_BY_GENRE:
             let genreGame = state.gamesCopy
 
             const genreFilter = action.payload === 'all' ? genreGame 
-            : genreGame.filter(g => g.genres?.includes(action.payload))
+            : genreGame.filter(g => g.genre?.includes(action.payload))
 
             return {
-                ...initialState,
+                ...state,
                 videogames: genreFilter
             }
 
         default: 
-        return state;
+            return state;
     }
 }
