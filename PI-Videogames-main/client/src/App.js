@@ -5,6 +5,7 @@ import VideoGames from './components/Videogames/VideoGames'
 import Screen from './components/LandingPage/Screen';
 import GameDetails from './components/GameDetails/GameDetails';
 import GameForm from './components/GameForm/GameForm'
+import Error from './components/Error/Error'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
             <Route path='/home' element={<VideoGames />} />      
             <Route path='/details/:id' element={<GameDetails />} />    
             <Route path='/creategame' element={<GameForm />} /> 
+            <Route path='*' element={<Error />} /> 
         </Routes>      
       </BrowserRouter>
     </div>
