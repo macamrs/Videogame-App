@@ -1,0 +1,121 @@
+.card-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    padding: 0 2rem;
+    margin: .7rem 0;
+}
+
+.card-container h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    letter-spacing: 1px;
+    text-transform:uppercase;
+    margin-bottom: 1rem;
+    background-image: linear-gradient(to right, #f6e726, #ccf270, #b5f5a8, #b9f2d1, #d8eae5);
+    background-repeat: no-repeat;
+    background-size: 100% 0.3em;
+    background-position: 0 88%;
+}
+
+.main_content {
+    display: flex;
+    column-gap: 3rem;
+    padding-top: 2rem;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.main_content img {
+    max-width: 40%;
+    height: 90%;
+    border-radius: 5%;
+}
+
+.info_content {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.info_content h3 {
+    font-weight: bold;
+    text-transform:uppercase;
+    margin-bottom: 1rem;
+    background-image: linear-gradient(to right, #f6e726, #ccf270, #b5f5a8, #b9f2d1, #d8eae5);
+    background-repeat: no-repeat;
+    background-size: 90% 0.4em;
+    background-position: 0 80%;
+}
+
+.info_content h3, 
+.info_content p {
+    padding: 0 2rem 0 1rem;
+    font-weight: 600;
+}
+
+.info_content .genres {
+    display: flex;
+    align-items: center;
+}
+
+
+.info_content .genres p {
+    background-color: #D8EAE5;
+    border-radius: 40%;
+    padding: .5rem;
+    margin: .5rem;
+}
+
+.info_content .description {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+}
+
+.info_content .description p {
+    line-height: 1.4rem;
+    font-weight: 500;
+}
+
+.info_content .released {
+    display: flex;
+    align-items: center;
+}
+
+.info_content .released p {
+    background-color: #D8EAE5;
+    border-radius: 40%;
+    padding: .5rem;
+    margin: .5rem;
+}
+
+.info_content .platforms {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.info_content .platforms p {
+    background-color: #E8D9E9;
+    border-radius: 40%;
+    padding: .5rem;
+    margin: .5rem;
+}
+
+.info_content .rating {
+    display: flex;
+    align-items: center;
+}
+
+.info_content .rating p {
+    background-color: #F6E726;
+    border-radius: 40%;
+    padding: .5rem;
+    margin: .5rem;
+}

@@ -1,12 +1,63 @@
 .card_game {
-    box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.3);
     border-radius: 1rem;
+    text-align: center;
+    box-shadow: 0 8px 16px -8px rgba(0,0,0,0.4);
+    background-image: linear-gradient(to bottom, #ffffff, #bfbfc5, #81848e, #464e5a, #0d1e2b);
+    padding: .4rem;
+    transition: .5s ease-in-out;
 }
 
 .card_game img {
     width: 100%;
-    height: 37vh;
+    height: 38vh;
     object-fit: cover;
-    border-radius: 1rem;
-    margin-bottom: 1rem;
+}
+
+.card_game .link {
+    text-decoration: none;
+}
+
+.card_game:hover {
+    box-shadow: 0px 20px 30px 3px rgba(0, 0, 0, 0.55);
+}
+
+.card_game .title {
+    font-weight: bold;
+    font-size: 1.09rem;
+    color: #0D1E2B;
+}
+
+.rating-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.rating-container img {
+    width: 1.7rem;
+    height: 1.7rem;
+    padding: 6px;
+    align-self: flex-start;
+}
+
+.card_game .rating {
+    font-weight: bolder;
+    color: #FFFFFF;
+    border-radius: 10%;
+}
+
+.genres_container {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.card_game .genres {
+    padding: .7rem;
+    border-radius: 30%;
+    font-weight: bold;
+    font-size: 1rem;
+    color: #FFFFFF;
+    background: rgba(149, 149, 149, 0.15);
 }
