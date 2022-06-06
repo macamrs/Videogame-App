@@ -1,0 +1,28 @@
+.nav_container {
+    padding: 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-around;
+    background-color: #0D1E2B;
+}
+
+.nav_container .link {
+    text-decoration: none;
+    color: #FEFEFE;
+    font-weight: 800;
+    font-size: 18px;
+    position: relative;
+}
+
+.logo img {
+    width: 18rem;
+    height: 6rem;
+}
+
+.wave {
+    height: 3rem;
+    margin-bottom: 2rem;
+    background-color: #0D1E2B;
+    border-radius: 0% 0% 18% 24% / 43% 10% 40% 40%;
+}
