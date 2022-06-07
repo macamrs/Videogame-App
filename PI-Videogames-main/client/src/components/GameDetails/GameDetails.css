@@ -119,3 +119,19 @@
     padding: .5rem;
     margin: .5rem;
 }
+
+.btn_back {
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #FFFFFF;
+    background: #F6E726;
+    border-radius: 1rem;
+    border: 2px solid #F6E726;
+	transition: 350ms ease-in-out;
+}
+
+.btn_back:hover {
+    background-color: #FFFFFF;
+    color: #F6E726;
+}
