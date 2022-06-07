@@ -4,24 +4,33 @@ import { useParams } from 'react-router-dom'
 import NavBar from '../NavBar/NavBar'
 import { getGameByID } from '../../store/actions/actions'
 import './GameDetails.css'
+import { Link } from 'react-router-dom'
+import load from '../../images/loading-no-bg.svg'
 
 export default function GameDetails() {
-
     let {id} = useParams();
     let dispatch = useDispatch();
     let gameDetail = useSelector((state) => state.gameDetail)
+    // console.log(gameDetail)
 
     useEffect(() => {
         dispatch(getGameByID(id))
-    },[dispatch])
+    },[])
 
     return (
         <div>
             <NavBar />
+        {       
+            gameDetail.id ?    
                 <div className='card-container'>
 
+            <div className='name_back'>
+                <Link className='link' to='/home'>
+                    <button className='btn_back'>Go back</button> 
+                </Link>
+
                     <h1>{gameDetail.name}</h1>
-                    
+            </div>
                     <div className='main_content'>
                         <img src={gameDetail.image} alt='#'/>
                         <div className='info_content'>
@@ -33,7 +42,10 @@ export default function GameDetails() {
 
                             <div className='genres'>
                                 <h3>Genres</h3>
-                                {gameDetail.genre?.map(g => {
+                                { gameDetail.vg_created_db === true ? gameDetail.genres.map(e => {
+                                    return <p key={e.id}>{e.name}</p>
+                                }) :
+                                gameDetail.genre?.map(g => {
                                     return <p key={g} >{g}</p>
                                 })}                                 
                             </div>
@@ -56,7 +68,9 @@ export default function GameDetails() {
                             </div>                                               
                         </div>
                     </div>
-                </div>                
+                </div>  
+              : <img height='500rem' width='500rem' alt='#' src={load} /> 
+            }            
         </div>            
     )
 }
