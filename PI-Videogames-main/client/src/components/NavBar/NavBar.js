@@ -2,7 +2,6 @@ import React from 'react'
 import './NavBar.css'
 import { Link } from 'react-router-dom'
 import logo from '../../images/logo-no-bg.svg'
-import wave from '../../images/wave.svg'
 
 export default function NavBar() {
     return (
