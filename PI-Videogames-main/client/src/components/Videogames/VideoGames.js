@@ -12,6 +12,7 @@ import NavBar from '../NavBar/NavBar.js'
 import Search from '../SearchBar/Search'
 import Pagination from '../Pagination/Pagination'
 import './VideoGames.css'
+import loading from '../../images/loading.gif'
 
 export default function VideoGames() {
     let dispatch = useDispatch();
@@ -40,7 +41,8 @@ export default function VideoGames() {
     const indexOfFirstGame = indexOfLastGame - gamesPerPage;
 
     const currentGame = allGames.slice(indexOfFirstGame, indexOfLastGame);
-    
+    console.log(currentGame)
+
     // CHANGE PAGE
     const paginate = (pageNumber) => setCurrentPage(pageNumber);     
     
@@ -72,8 +74,14 @@ export default function VideoGames() {
         function handleFilterGenre(e) {
             e.preventDefault();
             dispatch(sortByGenre(e.target.value))
-            // setOrder(e.target.value)
+            setOrder(e.target.value)
             setCurrentPage(1);
+        }
+
+        // RESET BTN
+        function handleResetFilters(e) {
+            e.preventDefault();
+            window.location.reload(false)
         }
   
     return (
@@ -105,23 +113,33 @@ export default function VideoGames() {
                 <select name='genres' onChange={e => handleFilterGenre(e)}>
                     <option value='all'>All Genres</option>
                     {allGenres?.map((el) => { 
-                        return <option key={el.id} value={el.name}>{el.name}</option>})}
-                </select>                 
+                        return <option 
+                        key={el.id} 
+                        value={el.name}>{el.name}</option>})}
+                </select>   
+
+                <button className='btn_reset' onClick={e => handleResetFilters(e)} >Reset</button>              
             </div>
             
             {/* ALL GAMES */}
             <div className='grid_games'>
-            {currentGame.length ? currentGame.map(game => {
+    { 
+    currentGame.length ?
+            currentGame.map(game => {
                     return (
                     <Game
                         key={game.id}
                         id={game.id}
                         name={game.name}
                         image={game.image}
-                        genres={game.genre}
+                        vg_created_db={game.vg_created_db}
+                        genres={ game.vg_created_db === true ? 
+                            game.genres.map(e => e.name) :
+                            game.genre}
                         rating={game.rating}
                         />)
-                }) : console.log('loading')  
+                }) 
+            : <img height='500rem' width='500rem' alt='#' src={loading} />
             }
             </div>
 
