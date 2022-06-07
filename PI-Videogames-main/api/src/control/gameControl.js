@@ -1,10 +1,41 @@
 const axios = require('axios')
 const { API_KEY } = process.env;
 const { Videogame, Genre } = require('../db')
+const { gamesDB } = require('./vgControl')
+const { Op } = require('sequelize')
+
+// http://localhost:3001/videogame
+const createVideoGame = async(req, res, next) => {
+        const { name, released, description, rating, platforms, image, genre, vg_created_db } = req.body;
+       
+        const newGame = await Videogame.create({
+            name, 
+            description, 
+            released,
+            rating,
+            image,
+            platforms,
+            vg_created_db
+        })
+
+        // console.log(genre)
+        genre.forEach(async (g) => {
+            let genreDb = await Genre.findAll({ 
+                where: {
+                    name : g
+                }
+            })
+           await newGame.addGenre(genreDb); 
+        })
+        // console.log(newGame)
+        return res.status(201).send(newGame) // retornar juego creado
+        // return res.status(200).send('Videogame created)           
+}
 
 // http://localhost:3001/videogame/3498
 const gameDetail = async (req, res) => {
   const { id } = req.params;
+//   console.log(id.length)
 
       try{
         // Lo busco en la api
@@ -25,32 +56,11 @@ const gameDetail = async (req, res) => {
               });
           }
 
-        } else {
-
+        } else if(id.length == 36) {
         // Lo busco en bd
-        let gameDB = await Videogame.findOne({
-            where : {id: id},
-            include: {
-                model: Genre,
-                attributes: ['name'],
-                through:{
-                    attributes:[],
-                }
-            }
-        })
-    
-        gameDB.genres = gameDB.genres.map(e => e.name)
-       
-        return res.send({
-            id: gameDB.id,
-            name: gameDB.name,
-            image: gameDB.image,
-            description: gameDB.description,
-            platforms: gameDB.platforms ,
-            released: gameDB.released,
-            rating: gameDB.rating,
-            genre: gameDB.genre
-        })    
+            let gameSearch = await gamesDB();
+            let gameFinal = await gameSearch.find(f => f.id == id);
+            return res.send(gameFinal)
     }
 
     } catch(error){
@@ -58,55 +68,7 @@ const gameDetail = async (req, res) => {
     }
 };
 
-// http://localhost:3001/videogame
-const createVideoGame = async(req, res, next) => {
-        const { name, released, description, rating, platforms, image, genre, vg_created_db } = req.body;
-
-        try {
-            const newGame = await Videogame.create({
-                name, 
-                description, 
-                released,
-                rating,
-                image,
-                platforms,
-                vg_created_db
-            })
-
-            const genreDb = await Genre.findAll({ 
-                where: {
-                    name : genre
-                }
-            })
-
-            newGame.addGenre(genreDb);
-
-            return res.status(201).send(newGame) // retornar juego creado
-            // return res.status(200).send('Videogame created)
-        } catch (error) {
-            console.log(error)
-        }              
-}
-
-const gameDeleted = async(req, res) => {
-  const { id } = req.params;
-  try {
-      let game = await Videogame.findByPk(id);
-
-      if(game) {
-          await Videogame.destroy( {where: { id: id}} )
-          res.send('Videogame deleted')            
-      } else {
-          res.send('Videogame not found') 
-      }
-  }
-   catch (error) {
-      console.log(error)
-  }
-}
-
 module.exports = {
     createVideoGame,
     gameDetail,
-    gameDeleted
 }

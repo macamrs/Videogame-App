@@ -7,7 +7,7 @@ const { Videogame, Genre } = require("../db");
 // http://localhost:3001/videogames
 // http://localhost:3001/videogames/red-dead-redemption-undead-nightmare
 
-const gameAPI = async(req, res) => {
+const gameAPI = async() => {
     try {
       let array = [];
       for (let i = 1; i < 6; i++) {
@@ -34,7 +34,6 @@ const gameAPI = async(req, res) => {
   };
   
 const gamesDB = async() => {
-  try {
     const gameDB = await Videogame.findAll({
         include: {
           model: Genre,
@@ -46,49 +45,47 @@ const gamesDB = async() => {
     });
 
     return gameDB;  
-    
-  } catch (error) {
-    console.log(error)
-  }
 };
   
 const getAllVideoGames = async(req, res) => {
-    const { name } = req.query;
+  const { name } = req.query;
 
-    const infoDB = await gamesDB();
-    const infoAPI = await gameAPI();
-    const allGames = infoDB.concat(infoAPI) //[...dataDb, ...dataApi];
-    // Primero me traigo los juegos de las base de datos
+  const infoDB = await gamesDB();
+  const infoAPI = await gameAPI();
+  const allGames = infoDB.concat(infoAPI) //[...dataDb, ...dataApi];
+  // Primero me traigo los juegos de las base de datos
 
-    // Search by name
-    if(name) {
-      let gameByName = await axios.get(`https://api.rawg.io/api/games?search={${name}}&key=${API_KEY}`);
+  // Search by name
+  if(name) {
+    let gameByName = await axios.get(`https://api.rawg.io/api/games?search={${name}}&key=${API_KEY}`);
 
-      let queryData = gameByName.data.results.map(g => {
-        return {        
-          id: g.id,
-          name: g.name,
-          image: g.background_image,
-          rating: g.rating,
-          genre: g.genres.map(g => g.name),
-          released: g.released,
-          platforms: g.platforms.map(p => p.platform.name)}
-      });
+    let queryData = gameByName.data.results.map(g => {
+      return {        
+        id: g.id,
+        name: g.name,
+        image: g.background_image,
+        rating: g.rating,
+        genre: g.genres.map(g => g.name),
+        released: g.released,
+        platforms: g.platforms.map(p => p.platform.name)
+      }
+    })
+    // console.log(queryData)
+    // allGames.filter(g => g.name.toLowerCase().includes(name.toLowerCase()));
+    
+    if (!queryData.length) {
+      return res.send('Game not in Data Base')
+    } else if(queryData.length > 15) {
+      queryData = queryData.slice(0, 15)
       // console.log(queryData)
-      // allGames.filter(g => g.name.toLowerCase().includes(name.toLowerCase()));
-      
-      if (!queryData.length) {
-        return res.send('Game not in Data Base')
-      } else if(queryData.length > 15) {
-        queryData = queryData.slice(0, 15)
-        // console.log(queryData)
-        return res.send(queryData);
-      } else {
-        return res.send(queryData)
-      }  
-    }
+      return res.send(queryData);
+    } else {
 
-    return res.status(200).send(allGames);
+      return res.send(queryData)
+    }  
+  }
+
+  return res.status(200).send(allGames);
 };
 
 

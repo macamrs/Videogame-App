@@ -7,13 +7,15 @@ const getGenres = async (req, res) => {
         let genreApi = await axios.get(`https://api.rawg.io/api/genres?key=${API_KEY}`);
         let apiInfo = genreApi.data.results;
         // console.log(apiInfo)
-        const genres = apiInfo.map(e => e.name)
+        let genres = apiInfo.map(e => e.name)
         // console.log(genres)
 
         //Put in db
-        genres.forEach(async element => {
-            await Genre.findOrCreate({
-                where: { name : element}
+        genres.forEach(element => {
+            Genre.findOrCreate({
+                where: { 
+                    name : element
+                }
             })
         })
 
