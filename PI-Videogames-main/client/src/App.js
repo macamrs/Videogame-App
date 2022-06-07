@@ -16,7 +16,7 @@ function App() {
             <Route path='/home' element={<VideoGames />} />      
             <Route path='/details/:id' element={<GameDetails />} />    
             <Route path='/creategame' element={<GameForm />} /> 
-            <Route path='*' element={<Error />} /> 
+            <Route element={<Error />} /> 
         </Routes>      
       </BrowserRouter>
     </div>

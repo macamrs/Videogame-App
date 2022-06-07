@@ -1,13 +1,10 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import notfound from '../../images/not-found.jpg'
 
 export default function Error() {
-    return (
-        <div>
-            <h1>Something went wrong</h1>
-            <Link to='/home'>
-                <button>Go to main page</button>
-            </Link>
-        </div>
-    )
+    <div>
+        <img alt='error' src={notfound} />
+        <Link to='/'>Go to main page</Link>
+    </div>
 }
