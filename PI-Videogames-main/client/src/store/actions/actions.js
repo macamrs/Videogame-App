@@ -64,9 +64,9 @@ export function postVideoGame(game) {
 export function getAllGenres() {
     return async function(dispatch) {
         return await axios.get('http://localhost:3001/genres')
-        .then((genres) => dispatch({
+        .then((g) => dispatch({
             type: GET_ALL_GENRES,
-            payload: genres.data                
+            payload: g.data                
         }))
         .catch((error) => {
             console.log(error)
