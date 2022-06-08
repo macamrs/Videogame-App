@@ -148,7 +148,6 @@ export default function VideoGames() {
                 gamesPerPage={gamesPerPage} 
                 totalGames={allGames.length} 
                 paginate={paginate}/>
-
         </div>
     )
 }

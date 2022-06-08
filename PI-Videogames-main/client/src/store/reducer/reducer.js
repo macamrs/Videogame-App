@@ -4,7 +4,6 @@ import {
     SEARCH_GAME, //
     GET_ALL_GENRES, //
     GET_PLATFORMS, //
-    DELETE_GAME, //
     SORT_BY_ALPHABET, //
     SORT_BY_RATING, //
     SORT_BY_ORIGIN, //
@@ -39,13 +38,7 @@ export default function reducer( state = initialState, action) {
             return {
                 ...state,
                 genres: action.payload
-            }             
-            
-        case DELETE_GAME:
-            return {
-                ...state,
-                gameDetail: action.payload
-            }     
+            }                
          
         case GET_PLATFORMS:
             return {

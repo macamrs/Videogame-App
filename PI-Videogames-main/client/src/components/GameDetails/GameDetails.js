@@ -5,7 +5,6 @@ import NavBar from '../NavBar/NavBar'
 import { getGameByID } from '../../store/actions/actions'
 import './GameDetails.css'
 import { Link } from 'react-router-dom'
-import load from '../../images/loading-no-bg.svg'
 
 export default function GameDetails() {
     let {id} = useParams();
@@ -69,7 +68,7 @@ export default function GameDetails() {
                         </div>
                     </div>
                 </div>  
-              : <img height='500rem' width='500rem' alt='#' src={load} /> 
+              : console.log('ID not found')
             }            
         </div>            
     )

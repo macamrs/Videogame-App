@@ -51,13 +51,13 @@ export default function GameForm() {
         } else if(!input.rating || input.rating < 0 || input.rating > 5) {
             errors.rating = 'Rating is required'
 
-        } else if(!input.platforms) {
+        } else if(!input.platforms.length) {
             error.platforms = 'Choose at least one option'
 
-        } else if(!input.genre) {
+        } else if(!input.genre.length) {
             error.genre = 'Choose at least one option'
 
-        } else if(!input.description || input.description <= 1) {
+        } else if(!input.description) {
             error.description = 'Description required'
         }
 
@@ -121,7 +121,7 @@ export default function GameForm() {
                 rating: '',
                 image: '',
                 platforms: [],
-                genre: []            
+                genre: [],            
             })                     
         } 
     }

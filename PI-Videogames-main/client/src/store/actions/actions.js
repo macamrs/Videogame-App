@@ -4,7 +4,6 @@ export const GET_VIDEOGAMES_BY_ID = 'GET_VIDEOGAMES_BY_ID'
 export const SEARCH_GAME = 'SEARCH_GAME'
 export const GET_ALL_GENRES = 'GET_ALL_GENRES'
 export const GET_PLATFORMS = 'GET_PLATFORMS'
-export const DELETE_GAME = 'DELETE_GAME'
 export const SORT_BY_ALPHABET = 'SORT_BY_ALPHABET'
 export const SORT_BY_RATING = 'SORT_BY_RATING'
 export const SORT_BY_ORIGIN = 'SORT_BY_ORIGIN'
@@ -88,21 +87,7 @@ export function getPlatforms() {
     }
 }
 
-// // DELETE GAME
-export function deleteVideoGame(id) {
-    return async function(dispatch) {
-        return await axios.delete(`http://localhost:3001/videogame/${id}`)
-        .then((trash) => dispatch({
-            type: DELETE_GAME,
-            payload: trash.data            
-        }))
-        .catch((error) => {
-            console.log(error)
-        })
-    }
-}
-
-// SORT
+// SORT AND FILTER
 export const sortByAlphabet = (payload) => {
     return {
         type: SORT_BY_ALPHABET,
