@@ -135,3 +135,13 @@
     background-color: #FFFFFF;
     color: #F6E726;
 }
+
+.error {
+    display: flex;
+    flex-direction: column;
+}
+
+.error img {
+    width: 100vw;
+    height: 72vh;
+}

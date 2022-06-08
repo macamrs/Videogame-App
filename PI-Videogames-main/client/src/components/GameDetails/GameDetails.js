@@ -20,7 +20,7 @@ export default function GameDetails() {
         <div>
             <NavBar />
         {       
-            gameDetail.id ?    
+            gameDetail.id &&   
                 <div className='card-container'>
 
             <div className='name_back'>
@@ -68,8 +68,16 @@ export default function GameDetails() {
                         </div>
                     </div>
                 </div>  
-              : console.log('ID not found')
-            }            
+               } 
+               {
+               !gameDetail.id && 
+               <div className='error'>
+                <Link className='link' to='/home'>
+                    <button className='btn_back'>Go back</button> 
+                </Link>
+                <img alt='#' width='50%' height='100%' src='https://c.tenor.com/lZChuv1gHAcAAAAC/pingu-angry.gif' />                        
+                </div> 
+             }    
         </div>            
     )
 }

@@ -51,10 +51,10 @@ export default function GameForm() {
         } else if(!input.rating || input.rating < 0 || input.rating > 5) {
             errors.rating = 'Rating is required'
 
-        } else if(!input.platforms.length) {
+        } else if(input.platforms.length === 0) {
             error.platforms = 'Choose at least one option'
 
-        } else if(!input.genre.length) {
+        } else if(input.genre.length === 0) {
             error.genre = 'Choose at least one option'
 
         } 
