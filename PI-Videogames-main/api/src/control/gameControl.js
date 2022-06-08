@@ -2,7 +2,6 @@ const axios = require('axios')
 const { API_KEY } = process.env;
 const { Videogame, Genre } = require('../db')
 const { gamesDB } = require('./vgControl')
-const { Op } = require('sequelize')
 
 // http://localhost:3001/videogame
 const createVideoGame = async(req, res, next) => {
