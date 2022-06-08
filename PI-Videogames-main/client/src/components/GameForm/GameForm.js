@@ -57,9 +57,7 @@ export default function GameForm() {
         } else if(!input.genre.length) {
             error.genre = 'Choose at least one option'
 
-        } else if(!input.description) {
-            error.description = 'Description required'
-        }
+        } 
 
         return errors;
     }
@@ -110,6 +108,7 @@ export default function GameForm() {
         e.preventDefault();
         if(!input.name && !input.description && !input.platforms && !input.genre){
             alert('Please complete all fields before creating your game') 
+
         } else { 
             dispatch(postVideoGame(input))
             alert('Game created successfully') 

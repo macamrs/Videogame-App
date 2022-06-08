@@ -17,7 +17,7 @@ export default function NavBar() {
                 <Link className='link logo' to='/'>
                     <img alt='logo' src={logo} />
                 </Link>
-                <Link className='link link-hover' onClick={e => handleReset(e)} to='/home'>All Games</Link>
+                <Link className='link link-hover' onChange={e => handleReset(e)} to='/home'>All Games</Link>
                 <Link className='link link-hover' to='/creategame'>Create Game</Link>         
             </div>
             <div className='wave'></div>    
