@@ -97,6 +97,16 @@ export default function Form() {
 	const onSubmit = (e) => {
 		e.preventDefault();
 
+		let input = {
+			name: name.value, 
+            description: description.value, 
+            released: released.value,
+            rating: rating.value,
+            image: image.value,
+            platforms: platforms.platforms,
+			genre: genre.genre
+		}
+
 		if(
 			name.valid === 'true' &&
 			description.valid === 'true' &&
@@ -107,11 +117,8 @@ export default function Form() {
             genre.genre 
             ){
 			setValidForm(true);
-			setErrors({
-				genre: '',
-				platforms: ''	
-			})
-            dispatch(postVideoGame(name.value, description.value, released.value, rating.value, image.value, platforms, genre))
+			setErrors({genre: '', platforms: ''})
+            dispatch(postVideoGame(input))
 			setDescription({value: '', valid: ''});
 			setName({value: '', valid: null});
 			setReleased({value: '', valid: null});
@@ -156,7 +163,7 @@ export default function Form() {
 					changedState={setReleased}
 					type="text"
 					label="Released Date"
-                    placeholder='YY-MM-DD'
+                    placeholder='YYYY-MM-DD'
 					name="released"
 					error='Released date is required' 
 					expresionRegular={expresiones.released}
